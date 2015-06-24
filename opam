@@ -1,6 +1,8 @@
-opam-version: "1"
+opam-version: "1.2"
+authors: ["john.else@citrix.com" "simon.cruanes@inria.fr"]
 maintainer: "john.else@citrix.com"
 build: [
+  [make "TEST_FLAG=--disable-tests"]
   [make]
 ]
 build-test: [
@@ -14,8 +16,11 @@ remove: [
   [make "PREFIX=%{prefix}%" "uninstall"]
 ]
 depends: [
-  "ounit"
   "ocamlfind"
+  "ounit" {test}
 ]
-depopts: ["lwt"]
-ocaml-version: [>= "4.00.1"]
+homepage: "https://github.com/johnelse/ocaml-irc-client"
+dev-repo: "https://github.com/johnelse/ocaml-irc-client"
+bug-reports: "https://github.com/johnelse/ocaml-irc-client/issues"
+available: [ "ocaml-version" >= "4.00.1" ]
+depopts: ["lwt" ]
