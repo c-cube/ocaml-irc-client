@@ -12,6 +12,10 @@ Flag lwt
   Description: build the Lwt library
   Default: false
 
+Flag tls
+  Description: build the Lwt+TLS library
+  Default: false
+
 Flag unix
   Description: build the Unix library
   Default: false
@@ -34,6 +38,16 @@ Library irc_client_lwt
   Findlibparent: irc_client
   Modules: Irc_client_lwt
 
+Library irc_client_lwt_tls
+  Build$: flag(lwt) && flag(tls)
+  Path: tls
+  BuildDepends: irc-client, lwt, lwt.unix, threads, tls
+  Findlibname: lwt_tls
+  Findlibparent: irc_client
+  ByteOpt: -bin-annot -thread
+  NativeOpt: -bin-annot -thread
+  Modules: Irc_client_lwt_tls
+
 Library irc_client_unix
   Build$: flag(unix)
   Path: unix
@@ -55,6 +69,13 @@ Executable example2
   MainIs: example2.ml
   Install: false
   BuildDepends: irc-client.lwt
+
+Executable example3
+  Build$: flag(lwt) && flag(tls) && flag(examples)
+  Path:   examples
+  MainIs: example3.ml
+  Install: false
+  BuildDepends: irc-client.lwt_tls
 
 Executable test_main
   Build$: flag(tests)

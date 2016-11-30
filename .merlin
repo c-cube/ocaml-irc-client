@@ -1,4 +1,4 @@
-PKG lwt lwt.unix unix oUnit bytes result
+PKG lwt lwt.unix unix oUnit bytes result tls
 S examples
 S lib
 S lwt
